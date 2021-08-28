@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Out of Town Scores Generator</title>
+        <script src="out_of_town_scores_generator.js"></script>
+    </head>
+
+    <body>
+        <h1>Out of Town Scores Generator</h1>
+        <form>
+            <div id="inputs">
+                Quarter: 
+                <select id="quarter">
+                    <option value="End Q1">End Q1</option>
+                    <option value="End Q2">End Q2</option>
+                    <option value="End Q3">End Q3</option>>
+                </select><br>
+                Number of Scoreboards:
+                <input id="number_of_scoreboards" type="number" min="1" value="5"><br>
+                <br>
+                <div id="scoreboards">
+                </div>
+                <input id="generate_output_button" type="button" value="Generate Output">
+            </div>
+        </form>
+    </body>
+</html>
