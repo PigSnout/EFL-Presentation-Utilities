@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Out of Town Scores Generator</title>
+        <script src="out_of_town_scores_generator.js"></script>
+        <script src="teams.js"></script>
+    </head>
+
+    <body>
+        <div style="text-align: center;">
+            <a href="spacer.html">Spacer</a> | <a href="single_post_formatter.html">Single Post Formatter</a> | <a href="out_of_town_scores_generator.html">Out of Town Scores Generator</a> | <a href="boxscores_generator.html">Boxscores Generator</a>
+        </div>
+        <h1>Out of Town Scores Generator</h1>
+        <div id="inputs">
+            League:
+            <select id="league">
+                <option value="EFL">EFL</option>
+                <option value="ECFA">ECFA</option>
+            </select><br>
+            Quarter: 
+            <select id="quarter">
+                <option value="End Q1">End Q1</option>
+                <option value="End Q2">End Q2</option>
+                <option value="End Q3">End Q3</option>
+                <option value="End Q4">End Q4</option>
+                <option value="Final">Final</option>
+            </select><br>
+            Number of Scoreboards:
+            <input id="number_of_scoreboards" type="number" min="1" value="5"><br><br>
+            <div id="scoreboards">
+            </div>
+            <input id="generate_output_button" type="button" value="Generate Output"><br><br>
+        </div>
+        Output:<br>
+        <textarea id="output" cols="150" rows="10"></textarea><br>
+    </body>
+</html>

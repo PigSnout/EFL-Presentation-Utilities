@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Single Post Formatter</title>
+        <script src="single_post_formatter.js"></script>
+        <script src="teams.js"></script>
+    </head>
+
+    <body>
+        <div style="text-align: center;">
+            <a href="spacer.html">Spacer</a> | <a href="single_post_formatter.html">Single Post Formatter</a> | <a href="out_of_town_scores_generator.html">Out of Town Scores Generator</a> | <a href="boxscores_generator.html">Boxscores Generator</a>
+        </div>
+        <h1>Single Post Formatter</h1>
+        <div id="inputs">
+            Original Text:<br>
+            <textarea id="original_text" cols="150" rows="20"></textarea><br>
+            <input id="spoiler_button" type="button" value="Spoiler"><br>
+            <input id="gif_button" type="button" value="GIF"><br>
+            League:
+            <select id="league">
+                <option value="EFL">EFL</option>
+                <option value="ECFA">ECFA</option>
+            </select><br>
+            Quarter: 
+            <select id="quarter">
+                <option value="Q1">Q1</option>
+                <option value="End Q1">End Q1</option>
+                <option value="Q2">Q2</option>
+                <option value="End Q2">End Q2</option>
+                <option value="Q3">Q3</option>
+                <option value="End Q3">End Q3</option>
+                <option value="Q4">Q4</option>
+                <option value="End Q4">End Q4</option>
+                <option value="OT">OT</option>
+                <option value="Final">Final</option>
+            </select><br>
+            <div id="scoreboard">
+            </div>
+            Commentary:<br>
+            <textarea id="commentary" cols="150" rows="2"></textarea><br>
+            <input id="generate_output_button" type="button" value="Generate Output"><br><br>
+            Formatted Post:<br>
+            <textarea id="output" cols="150" rows="10"></textarea><br>
+        </div>
+    </body>
+</html>
