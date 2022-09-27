@@ -1,88 +1,101 @@
 window.onload = main
 
 function main() {
-    generateScoreboardDiv()
+    /*
+    Initialization function that runs when the page loads.
+    */
 
-    document.getElementById("spoiler_button").onclick = generateSpoilerTag
-    document.getElementById("gif_button").onclick = generateGIFTag
-    document.getElementById("generate_output_button").onclick = generateOutput
-    document.getElementById("league").oninput = generateScoreboardDiv
+    generate_navbar_html()
+    generate_scoreboard_div()
+
+    document.getElementById("spoiler_button").onclick = function() {add_tag("[SPOILER]")}
+    document.getElementById("gif_button").onclick = function() {add_tag("[GIF]")}
+    document.getElementById("commentary_button").onclick = function() {add_tag("[COMMENTARY]")}
+    document.getElementById("blank_line_button").onclick = function() {add_tag("[BLANK LINE]")}
+    document.getElementById("home_team_highlight_button").onclick = function() {add_tag("[HOME TEAM HIGHLIGHT]")}
+    document.getElementById("away_team_highlight_button").onclick = function() {add_tag("[AWAY TEAM HIGHLIGHT]")}
+    document.getElementById("penalty_highlight_button").onclick = function() {add_tag("[PENALTY HIGHLIGHT]")}
+    document.getElementById("clock_stoppage_button").onclick = function() {add_tag("[CLOCK STOPPAGE]")}
+    document.getElementById("league").oninput = generate_scoreboard_div
+    document.getElementById("generate_output_button").onclick = generate_output
 }
 
-function generateOutput() {
-    var lines = document.getElementById("original_text").value.split("\n")
-    lines = removeEmptyLines(lines)
+function generate_scoreboard_div() {
+    /*
+    Generates the HTML divs containing the scoreboard inputs and updates the
+    page to display these divs.
+    */
 
-    var output_div = document.createElement("div")
-    var parent_element = output_div
+    var scoreboard_div = document.createElement("div")
+    scoreboard_div.setAttribute("id", "scoreboard")
 
-    for (var i = 0; i < lines.length; i++) {
-        line = lines[i]
+    var away_team_text = document.createTextNode("Away Team: ")
+    scoreboard_div.append(away_team_text)
+    
+    var away_team_select = generate_team_select()
+    away_team_select.setAttribute("id", "away_team")
+    scoreboard_div.append(away_team_select)
 
-        if (line.includes("[SPOILER]")) {
-            if (i != 0) {
-                parent_element.appendChild(generateEmptyParagraph())
-            }
+    var away_score_text = document.createTextNode(" Away Score: ")
+    scoreboard_div.append(away_score_text)
+    
+    var away_score_input = document.createElement("input")
+    away_score_input.setAttribute("id", "away_score")
+    away_score_input.setAttribute("type", "number")
+    away_score_input.setAttribute("value", "0")
+    scoreboard_div.append(away_score_input)
 
-            var spoiler_div = document.createElement("div")
-            spoiler_div.setAttribute("class", "ipsSpoiler")
-            spoiler_div.setAttribute("data-ipsspoiler", "")
-            parent_element.appendChild(spoiler_div)
-        
-            var spoiler_header_div = document.createElement("div")
-            spoiler_header_div.setAttribute("class", "ipsSpoiler_header")
-            spoiler_div.appendChild(spoiler_header_div)
-        
-            var spoiler_header_span = document.createElement("span")
-            spoiler_header_div.appendChild(spoiler_header_span)
-        
-            var spoiler_header_text = document.createTextNode("Spoiler")
-            spoiler_header_span.appendChild(spoiler_header_text)
-        
-            spoiler_contents_div = document.createElement("div")
-            spoiler_contents_div.setAttribute("class", "ipsSpoiler_contents ipsClearfix")
-            spoiler_contents_div.setAttribute("data-gramm", "false")
-            spoiler_div.appendChild(spoiler_contents_div)
+    var home_team_text = document.createTextNode(" Home Team: ")
+    scoreboard_div.append(home_team_text)
+    
+    var home_team_select = generate_team_select()
+    home_team_select.setAttribute("id", "home_team")
+    scoreboard_div.append(home_team_select)
 
-            parent_element = spoiler_contents_div
-        }
+    var home_score_text = document.createTextNode(" Home Score: ")
+    scoreboard_div.append(home_score_text)
+    
+    var home_score_input = document.createElement("input")
+    home_score_input.setAttribute("id", "home_score")
+    home_score_input.setAttribute("type", "number")
+    home_score_input.setAttribute("value", "0")
+    scoreboard_div.append(home_score_input)
 
-        else if (line.includes("[GIF=")) {
-            var split_line = line.split(/\[GIF=(.*)\]/)
-            var image_url = split_line[1]
+    var old_scoreboard_div = document.getElementById("scoreboard")
+    var inputs_div = document.getElementById("inputs")
+    inputs_div.replaceChild(scoreboard_div, old_scoreboard_div)
+}
 
-            var image_p = document.createElement("p")
-            image_p.setAttribute("style", "text-align: center;")
-            parent_element.appendChild(image_p)
+function add_tag(tag) {
+    /*
+    Adds the given tag in to the original text input field at the currently
+    selected location.
 
-            var image_img = document.createElement("img")
-            image_img.setAttribute("src", image_url)
-            image_p.appendChild(image_img)
-        }
+    Parameters:
+        tag (String): The tag to be added to the text.
+    */
 
-        else {
-            line_p = document.createElement("p")
-            parent_element.appendChild (line_p)
+    if (tag == "[GIF]") {
+        var url = prompt("Enter the URL of the GIF")
 
-            line_text = document.createTextNode(line)
-            line_p.appendChild(line_text)
-        }
+        tag = `[SPOILER]\n\n[GIF=${url}]\n\n[SPOILER]`        
     }
 
-    var commentary = document.getElementById("commentary").value
+    var original_text = document.getElementById("original_text")
 
-    if (commentary != "") {
-        parent_element.appendChild(generateEmptyParagraph())
+    var position = original_text.selectionStart
+    var text = original_text.value
+    var first_half = text.substring(0, position)
+    var second_half = text.substring(position, text.length)
 
-        var commentary_p = document.createElement("p")
-        parent_element.appendChild(commentary_p)
+    original_text.value = `${first_half}${tag}${second_half}`
+}
 
-        var commentary_strong = document.createElement("strong")
-        commentary_p.appendChild(commentary_strong)
-
-        var commentary_text = document.createTextNode(commentary)
-        commentary_strong.appendChild(commentary_text)
-    }
+function generate_output() {
+    /*
+    Generates the output HTML that will create the properly formatted EFL forum
+    post based on the user's inputs and places the HTML code in the output box.
+    */
 
     var league = document.getElementById("league").value
     var away_team = document.getElementById("away_team").value
@@ -90,158 +103,196 @@ function generateOutput() {
     var home_team = document.getElementById("home_team").value
     var home_score = document.getElementById("home_score").value
     var quarter = document.getElementById("quarter").value
+
+    var lines = document.getElementById("original_text").value.split("\n")
+    lines = remove_empty_lines(lines)
+
+    var output_div = document.createElement("div")
+    var parent_element = output_div
+
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i]
+
+        if (line.includes("[SPOILER]")) {
+            if (i != 0 && !(lines[i - 1].includes("[SPOILER]")) && !(lines[i - 1].includes("[COMMENTARY]"))) {
+                parent_element.append(generate_empty_paragraph())
+            }
+
+            let spoiler_div = document.createElement("div")
+            spoiler_div.setAttribute("class", "ipsSpoiler")
+            spoiler_div.setAttribute("data-ipsspoiler", "")
+            parent_element.append(spoiler_div)
+        
+            let spoiler_header_div = document.createElement("div")
+            spoiler_header_div.setAttribute("class", "ipsSpoiler_header")
+            spoiler_div.append(spoiler_header_div)
+        
+            let spoiler_header_span = document.createElement("span")
+            spoiler_header_div.append(spoiler_header_span)
+        
+            let spoiler_header_text = document.createTextNode("Spoiler")
+            spoiler_header_span.append(spoiler_header_text)
+        
+            let spoiler_contents_div = document.createElement("div")
+            spoiler_contents_div.setAttribute("class", "ipsSpoiler_contents ipsClearfix")
+            spoiler_contents_div.setAttribute("data-gramm", "false")
+            spoiler_div.append(spoiler_contents_div)
+
+            parent_element = spoiler_contents_div
+        }
+
+        else if (line.includes("[GIF=")) {
+            let split_line = line.split(/\[GIF=(.*)\]/)
+            let image_url = split_line[1]
+
+            let image_p = document.createElement("p")
+            image_p.setAttribute("style", "text-align: center;")
+            parent_element.append(image_p)
+
+            let image_img = document.createElement("img")
+            image_img.setAttribute("src", image_url)
+            image_p.append(image_img)
+        }
+
+        else if (line.includes("[COMMENTARY]")) {
+            if (i != 0 && !(lines[i - 1].includes("[SPOILER]")) && !(lines[i - 1].includes("[COMMENTARY]"))) {
+                parent_element.append(generate_empty_paragraph())
+            }
+
+            let line_p = document.createElement("p")
+            parent_element.append(line_p)
+
+            let line_strong = document.createElement("strong")
+            line_p.append(line_strong)
+
+            let line_text = document.createTextNode(line.replace("[COMMENTARY]", "").trim())
+            line_strong.append(line_text)
+
+            if (i != lines.length - 1) {
+                parent_element.append(generate_empty_paragraph())
+            }
+        }
+
+        else if (line.includes("[BLANK LINE]")) {
+            parent_element.append(generate_empty_paragraph())
+        }
+
+        else {
+            let line_p = document.createElement("p")
+            parent_element.append(line_p)
+
+            if (line.includes("[HOME TEAM HIGHLIGHT]")) {
+                let line_strong = document.createElement("strong")
+                line_p.append(line_strong)
+
+                let line_span = document.createElement("span")
+                line_span.setAttribute("style", `color: #ffffff; background-color: ${leagues[league]["Teams"][home_team]["Team Color Code"]};`)
+                line_strong.append(line_span)
+
+                let line_text = document.createTextNode("\u00A0" + line.replace("[HOME TEAM HIGHLIGHT]", "").trim() + "\u00A0")
+                line_span.append(line_text)
+            }
+
+            else if (line.includes("[AWAY TEAM HIGHLIGHT]")) {
+                let line_strong = document.createElement("strong")
+                line_p.append(line_strong)
+
+                let line_span = document.createElement("span")
+                line_span.setAttribute("style", `color: #ffffff; background-color: ${leagues[league]["Teams"][away_team]["Team Color Code"]};`)
+                line_strong.append(line_span)
+
+                let line_text = document.createTextNode("\u00A0" + line.replace("[AWAY TEAM HIGHLIGHT]", "").trim() + "\u00A0")
+                line_span.append(line_text)
+            }
+
+            else if (line.includes("[PENALTY HIGHLIGHT]")) {
+                let line_span = document.createElement("span")
+                line_span.setAttribute("style", "color: #000000; background-color: #ffff00;")
+                line_p.append(line_span)
+
+                let line_text = document.createTextNode("\u00A0" + line.replace("[PENALTY HIGHLIGHT]", "").trim() + "\u00A0")
+                line_span.append(line_text)
+            }
+
+            else if (line.includes("[CLOCK STOPPAGE]")) {
+                let line_u = document.createElement("u")
+                line_p.append(line_u)
+
+                let line_strong = document.createElement("strong")
+                line_u.append(line_strong)
+
+                let line_text = document.createTextNode(line.replace("[CLOCK STOPPAGE]", "").trim())
+                line_strong.append(line_text)
+            }
+
+            else {
+                let line_text = document.createTextNode(line)
+                line_p.append(line_text)
+            }
+        }
+    }
+
+    var commentary = document.getElementById("commentary").value
+
+    if (commentary != "") {
+        if (!(lines[lines.length - 1].includes("[SPOILER]"))) {
+            parent_element.append(generate_empty_paragraph())
+        }
+
+        var commentary_p = document.createElement("p")
+        parent_element.append(commentary_p)
+
+        var commentary_strong = document.createElement("strong")
+        commentary_p.append(commentary_strong)
+
+        var commentary_text = document.createTextNode(commentary)
+        commentary_strong.append(commentary_text)
+    }
     
     if (quarter.includes("End") || quarter.includes("Final")) {
         var time = ""
     }
+    
     else {
-        var time = getScoreboardTime(lines)
+        var time = get_scoreboard_time(lines)
     }
 
-    parent_element.appendChild(generateEmptyParagraph())
-    parent_element.appendChild(generateScoreboard(league, away_team, away_score, home_team, home_score, quarter, time))
+    if (quarter == "End Q1") {
+        document.getElementById("quarter").value = "Q2"
+    }
+
+    else if (quarter == "End Q2") {
+        document.getElementById("quarter").value = "Q3"
+    }
+
+    else if (quarter == "End Q3") {
+        document.getElementById("quarter").value = "Q4"
+    }
+
+    else if (quarter == "End Q4") {
+        document.getElementById("quarter").value = "OT"
+    }
+
+    parent_element.append(generate_empty_paragraph())
+    parent_element.append(generate_scoreboard(away_team, away_score, home_team, home_score, quarter, time))
 
     document.getElementById("output").value = output_div.innerHTML
 }
 
-function generateSpoilerTag() {
-    var original_text = document.getElementById("original_text")
+function get_scoreboard_time(lines) {
+    /*
+    Gets the proper time for the scoreboard by going through the lines from the
+    original text input and finding the latest timestamp that appears.
 
-    var position = original_text.selectionStart
-    var text = original_text.value
-    var first_half = text.substring(0, position)
-    var second_half = text.substring(position, text.length)
-    
-    if (position == 0) {
-        var spoiler_tag = "[SPOILER]\n"
-    }
-    else {
-        var spoiler_tag = "\n[SPOILER]\n"
-    }
+    Parameters:
+        lines (String Array): The list of lines in the original text input.
 
-    original_text.value = first_half + spoiler_tag + second_half
-}
+    Returns:
+        A String containing the proper time for the scoreboard or an empty
+        string if not timestamp can be found in the provided lines.
+    */
 
-function generateGIFTag() {
-    var url = prompt("Enter the URL of the GIF")
-
-    var original_text = document.getElementById("original_text")
-
-    var position = original_text.selectionStart
-    var text = original_text.value
-    var first_half = text.substring(0, position)
-    var second_half = text.substring(position, text.length)
-    if (position == 0) {
-        var gif_tag = `[SPOILER]\n\n[GIF=${url}]\n\n[SPOILER]\n`
-    }
-    else {
-        var gif_tag = `\n[SPOILER]\n\n[GIF=${url}]\n\n[SPOILER]\n`
-    }
-
-    original_text.value = first_half + gif_tag + second_half
-}
-
-// function generateTimeInput() {
-//     var quarter = document.getElementById("quarter").value
-
-//     var time_input = document.createElement("input")
-//     time_input.setAttribute("id", "time")
-//     time_input.setAttribute("type", "text")
-//     time_input.setAttribute("size", "5")
-//     time_input.setAttribute("maxlength", "5")
-
-//     if (quarter.includes("End") || quarter == "Final") {
-//         time_input.setAttribute("disabled", "true")
-//     }
-//     else {
-//         time_input.setAttribute("value", "15:00")
-//     }
-
-//     var old_time_input = document.getElementById("time")
-//     var inputs_div = document.getElementById("inputs")
-//     inputs_div.replaceChild(time_input, old_time_input)
-// }
-
-function generateScoreboardDiv() {
-    var scoreboard_div = document.createElement("div")
-    scoreboard_div.setAttribute("id", "scoreboard")
-
-    var away_team_text = document.createTextNode("Away Team: ")
-    scoreboard_div.appendChild(away_team_text)
-    
-    var away_team_select = generateTeamsSelect()
-    away_team_select.setAttribute("id", "away_team")
-    scoreboard_div.appendChild(away_team_select)
-
-    var away_score_text = document.createTextNode(" Away Score: ")
-    scoreboard_div.appendChild(away_score_text)
-    
-    var away_score_input = document.createElement("input")
-    away_score_input.setAttribute("id", "away_score")
-    away_score_input.setAttribute("type", "number")
-    scoreboard_div.appendChild(away_score_input)
-
-    var home_team_text = document.createTextNode(" Home Team: ")
-    scoreboard_div.appendChild(home_team_text)
-    
-    var home_team_select = generateTeamsSelect()
-    home_team_select.setAttribute("id", "home_team")
-    scoreboard_div.appendChild(home_team_select)
-
-    var home_score_text = document.createTextNode(" Home Score: ")
-    scoreboard_div.appendChild(home_score_text)
-    
-    var home_score_input = document.createElement("input")
-    home_score_input.setAttribute("id", "home_score")
-    home_score_input.setAttribute("type", "number")
-    scoreboard_div.appendChild(home_score_input)
-
-    var old_scoreboard_div = document.getElementById("scoreboard")
-    var inputs_div = document.getElementById("inputs")
-    inputs_div.replaceChild(scoreboard_div, old_scoreboard_div)
-}
-
-function generateTeamsSelect() {
-    var select = document.createElement("select")
-    var league = document.getElementById("league").value
-
-    for (team in teams[league]) {
-        var team_option = document.createElement("option")
-        team_option.setAttribute("value", team)
-        select.appendChild(team_option)
-
-        var team_text = document.createTextNode(team)
-        team_option.appendChild(team_text)
-    }
-
-    return select
-}
-
-function removeEmptyLines(lines) {
-    var new_lines = []
-
-    for (var i = 0; i < lines.length; i++) {
-        line = lines[i]
-
-        if (line != "") {
-            new_lines.push(line)
-        }
-    }
-
-    return new_lines
-}
-
-function generateEmptyParagraph() {
-    var empty_paragraph_p = document.createElement("p")
-
-    var empty_paragraph_text = document.createTextNode("\u00A0")
-    empty_paragraph_p.appendChild(empty_paragraph_text)
-
-    return empty_paragraph_p
-}
-
-function getScoreboardTime(lines) {
-    for (i = lines.length - 1; i > -1; i--) {
+    for (let i = lines.length - 1; i > -1; i--) {
         var line = lines[i]
 
         var split_line = line.split(/(\d+:\d{2})/)
@@ -252,92 +303,4 @@ function getScoreboardTime(lines) {
     }
 
     return ""
-}
-
-function generateScoreboard(league, away_team, away_score, home_team, home_score, quarter, time) {
-    var scoreboard_div = document.createElement("div")
-    scoreboard_div.setAttribute("style", "text-align: center")
-
-    var table_div = document.createElement("div")
-    table_div.setAttribute("style", "display: inline-block")
-    scoreboard_div.appendChild(table_div)
-
-    var table = document.createElement("table")
-    table.setAttribute("style", "border-collapse: collapse")
-    table_div.appendChild(table)
-
-    var tbody = document.createElement("tbody")
-    table.appendChild(tbody)
-
-    var top_tr = document.createElement("tr")
-    tbody.appendChild(top_tr)
-
-    var away_team_logo_th = document.createElement("th")
-    away_team_logo_th.setAttribute("style", `background-color: ${teams[league][away_team]["Team Color Code"]}; height: 100px; width: 110px; border: 5px solid DarkGrey`)
-    top_tr.appendChild(away_team_logo_th)
-
-    var away_team_logo_img = document.createElement("img")
-    away_team_logo_img.setAttribute("data-emoticon", "true")
-    away_team_logo_img.setAttribute("src", teams[league][away_team]["Team Logo URL"])
-    away_team_logo_img.setAttribute("style", "height:105px; width: 105px;")
-    away_team_logo_th.appendChild(away_team_logo_img)
-
-    var quarter_th = document.createElement("th")
-    quarter_th.setAttribute("style", "background-color: Silver; height: 100px; width: 85px; border: 5px solid DarkGrey")
-    top_tr.appendChild(quarter_th)
-
-    var quarter_p = document.createElement("p")
-    quarter_p.setAttribute("style", "font-family: Georgia; font-size: 25px; color: White")
-    quarter_th.appendChild(quarter_p)
-
-    var quarter_text = document.createTextNode(quarter)
-    quarter_p.appendChild(quarter_text)
-
-    var home_team_logo_th = document.createElement("th")
-    home_team_logo_th.setAttribute("style", `background-color: ${teams[league][home_team]["Team Color Code"]}; height: 100px; width: 110px; border: 5px solid DarkGrey`)
-    top_tr.appendChild(home_team_logo_th)
-
-    var home_team_logo_img = document.createElement("img")
-    home_team_logo_img.setAttribute("data-emoticon", "true")
-    home_team_logo_img.setAttribute("src", teams[league][home_team]["Team Logo URL"])
-    home_team_logo_img.setAttribute("style", "height:105px; width: 105px;")
-    home_team_logo_th.appendChild(home_team_logo_img)
-
-    var bottom_tr = document.createElement("tr")
-    tbody.append(bottom_tr)
-
-    var away_score_th = document.createElement("th")
-    away_score_th.setAttribute("style", "background-color: Black; height: 50px; width: 110px; border: 5px solid DarkGrey")
-    bottom_tr.appendChild(away_score_th)
-
-    var away_score_p = document.createElement("p")
-    away_score_p.setAttribute("style", "font-family: Georgia; font-size: 25px; color: White")
-    away_score_th.appendChild(away_score_p)
-
-    var away_score_text = document.createTextNode(away_score)
-    away_score_p.appendChild(away_score_text)
-
-    var time_th = document.createElement("th")
-    time_th.setAttribute("style", "background-color: Silver; height: 50px; width: 85px; border: 5px solid DarkGrey")
-    bottom_tr.appendChild(time_th)
-
-    var time_p = document.createElement("p")
-    time_p.setAttribute("style", "font-family: Georgia; font-size: 25px; color: White")
-    time_th.appendChild(time_p)
-
-    var time_text = document.createTextNode(time)
-    time_p.appendChild(time_text)
-
-    var home_score_th = document.createElement("th")
-    home_score_th.setAttribute("style", "background-color: Black; height: 50px; width: 110px; border: 5px solid DarkGrey")
-    bottom_tr.appendChild(home_score_th)
-
-    var home_score_p = document.createElement("p")
-    home_score_p.setAttribute("style", "font-family: Georgia; font-size: 25px; color: White")
-    home_score_th.appendChild(home_score_p)
-
-    var home_score_text = document.createTextNode(home_score)
-    home_score_p.appendChild(home_score_text)
-
-    return scoreboard_div
 }

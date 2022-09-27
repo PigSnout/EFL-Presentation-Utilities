@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <title>Out of Town Scores Generator</title>
-        <script src="out_of_town_scores_generator.js"></script>
+        <title>Thread Creator</title>
+        <script src="thread_creator.js"></script>
         <script src="leagues.js"></script>
         <script src="shared.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -11,25 +11,27 @@
 
     <body>
         <div class="container">
-            <h1>Out of Town Scores Generator</h1>
+            <h1>Thread Creator</h1>
             <div id="inputs">
                 League:
                 <select id="league">
                     <option value="EFL">EFL</option>
                     <option value="ECFA">ECFA</option>
-                </select><br>
-                Quarter: 
-                <select id="quarter">
-                    <option value="End Q1">End Q1</option>
-                    <option value="End Q2">End Q2</option>
-                    <option value="End Q3">End Q3</option>
-                    <option value="End Q4">End Q4</option>
-                    <option value="OT">OT</option>
-                    <option value="Final">Final</option>
-                </select><br>
-                Number of Scoreboards:
-                <input id="number_of_scoreboards" type="number" min="1" value="3"><br><br>
-                <div id="scoreboards">
+                </select><br><br>
+                Season:
+                <input id="season" type="number" min="1">
+                Game:
+                <select id="game">
+                </select><br><br>
+                Date:
+                <input id="date" type="date">
+                Presenter:
+                <input id="presenter">
+                Time:
+                <input id="time"><br><br>
+                Number of Games:
+                <input id="number_of_games" type="number" min="1" value="4"><br><br>
+                <div id="games">
                 </div>
                 <input id="generate_output_button" type="button" value="Generate Output"><br><br>
             </div>

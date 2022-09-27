@@ -4,27 +4,28 @@
         <meta charset="UTF-8"/>
         <title>Boxcores Generator</title>
         <script src="boxscores_generator.js"></script>
-        <script src="teams.js"></script>
+        <script src="leagues.js"></script>
+        <script src="shared.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     </head>
 
     <body>
-        <div style="text-align: center;">
-            <a href="spacer.html">Spacer</a> | <a href="single_post_formatter.html">Single Post Formatter</a> | <a href="out_of_town_scores_generator.html">Out of Town Scores Generator</a> | <a href="boxscores_generator.html">Boxscores Generator</a>
-        </div>
-        <h1>Boxscores Generator</h1>
-        <div id="inputs">
-            League:
-            <select id="league">
-                <option value="EFL">EFL</option>
-                <option value="ECFA">ECFA</option>
-            </select><br>
-            Number of Boxscores:
-            <input id="number_of_boxscores" type="number" min="1" value="6"><br><br>
-            <div id="boxscores">
+        <div class="container">
+            <h1>Boxscores Generator</h1>
+            <div id="inputs">
+                League:
+                <select id="league">
+                    <option value="EFL">EFL</option>
+                    <option value="ECFA">ECFA</option>
+                </select><br>
+                Number of Boxscores:
+                <input id="number_of_boxscores" type="number" min="1" value="4"><br><br>
+                <div id="boxscores">
+                </div>
+                <input id="generate_output_button" type="button" value="Generate Output"><br><br>
             </div>
-            <input id="generate_output_button" type="button" value="Generate Output"><br><br>
+            Output:<br>
+            <textarea id="output" cols="150" rows="10"></textarea><br>
         </div>
-        Output:<br>
-        <textarea id="output" cols="150" rows="10"></textarea><br>
     </body>
 </html>
