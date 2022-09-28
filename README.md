@@ -88,6 +88,9 @@ Once you receive the Play By Play from the simmer, you can copy the entire text 
 
 ### Purpose
 
+The Single Post Formatter allows you to do the formatting for an individual post in your presentation. The post will display your provided commentary in bold at the bottom of the post and will also display a scoreboard of the current score and time underneath the commentary. It also allows you to add the following formatting features in the middle of the post:
+- 
+
 ### Inputs
 
 ### How to Use
