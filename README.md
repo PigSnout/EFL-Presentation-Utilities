@@ -30,10 +30,10 @@ The Thread Creator allows you to create a formatted post that you can use when c
 - `Presenter`: The name of the presenter who is presenting the game.
 - `Time`: The time when the game will be presented.
 - `Number of Games`: The number of games for this presentation. The number of selections below will adjust when this value is updated.
-- `Away Team #X`: The away team for game #X
-- `Home Team #X`: The home team for game #X
-- `Game of the Week Away Team`: The away team for the Game of the Week
-- `Game of the Week Home Team`: The home team for the Game of the Week
+- `Away Team #X`: The away team for game #X.
+- `Home Team #X`: The home team for game #X.
+- `Game of the Week Away Team`: The away team for the Game of the Week.
+- `Game of the Week Home Team`: The home team for the Game of the Week.
 
 ### How to Use
 
@@ -89,11 +89,29 @@ Once you receive the Play By Play from the simmer, you can copy the entire text 
 ### Purpose
 
 The Single Post Formatter allows you to do the formatting for an individual post in your presentation. The post will display your provided commentary in bold at the bottom of the post and will also display a scoreboard of the current score and time underneath the commentary. It also allows you to add the following formatting features in the middle of the post:
-- 
+- `Spoiler`: Puts all of the remaining text below the spoiler tag inside of a spoiler in the post. You can have nested spoilers if you include another spoiler tag below the previous spoiler tag.
+- `GIF`: Allows the user to provide a link to a GIF and that GIF will be embeded in the post. Spoiler tags will also be added above and below so that the GIF will be hidden in a spoiler. (The reason for the spoiler before the GIF is that a GIF within a spoiler won't start playing until the viewer opens the spoiler, so you can ensure that it won't start playing before the viewer is ready to see the GIF play out. The reason for the spoiler after the GIF is so that the text of the plays after the GIF will be hidden until the viewer opens the spoiler so that the viewer will be able to watch the GIF without having the outcome spoiled by the text afterward. If you want a GIF without the spoilers, you can remove the spoiler tags and keep just the GIF tag.)
+- `Commentary`: Used to add additional commentary in the middle of the post (if the only commentary that you want is the end of post commentary, you can just type that in the Commentary box). The commentary text will be bolded and will be on its own separate line with blank lines above and below.
+- `Blank Line`: Used to add a blank line in the middle of the post. Because extra blank lines are usually created when copying from the forum to the Original Text box, all blank lines will be ignored when processing the text. If you want to add an actual blank line in the middle of the text, you can do it by using this tag.
+- `Home Team Highlight`: Used to make big plays by the home team stand out from the other plays. The line will have bolded white text and will be highlighted with a background in the color of the home team's scoreboard color.
+- `Away Team Highlight`: Used to make big plays by the away team stand out from the other plays. The line will have bolded white text and will be highlighted with a background in the color of the away team's scoreboard color.
+- `Penalty Highlight`: Used to make penalties stand out from the other plays. The line will have black text and will be highlighed with a bright yellow background.
+- `Clock Stoppage`: Used to make clock stoppages (timeouts and spikes) stand out from the other plays. The line with the clock stoppage will be bolded and underlined.
 
 ### Inputs
 
+- `Original Text`: The original text of the portion of the Play By Play that you want to format (With tags added as needed for formating).
+- `League`: Specify which league the game is from. This will determine the team options that are provided below.
+- `Quarter`: The current quarter of the game. (Note that if you select one of the end of quarter options, it will automatically increment to the next quarter once you click Generate Output so that you don't have to update it again for the next post.)
+- `Away Team`: The away team for the game.
+- `Away Score`: The away team's current score.
+- `Home Team`: The home team for the game.
+- `Home Score`: The home team's current score.
+- `Commentary`: The commentary that you want to provide at the end of the post.
+
 ### How to Use
+
+Copy the portion of the Play By Play that you want to format and paste it in to the Original Text box. (Note that when copying between the forums and the Original Text box, you may see extra blank lines added between the lines of the Play By Play. This is not an issue as the code will remove the blank lines before giving you your output.) Now you can add any formatting you want in the body of the post by using the buttons below the Original Text box to add tags to the text. When you click one of those buttons, the specified tag will be added at your current cursor position. If you click the GIF button, you will be asked to provide the link of the GIF before the tag is created. If the tag you are adding is Spoiler, GIF, or Blank Line, it should be on its own line with no other text on that line. For the other tags, you should add them on the same line as the text you want to format. They can be placed at any position on the line as they will be removed from the text when the formatting is added. Note that you should not add more than one tag on one line as the post will not be formatted properly if you do so, only the formatting from the first tag will be applied and the second tag will remain in the text of the line. However, there shouldn't be any situation where you would need more than one of these tags in one line as the formatting they add conflicts with eachother. If you don't want to deal with the tags or you prefer to add your own style of formatting on the post, you can simply keep the original version of the text in the Original Text box and you can format it manually once you copy the post over to the forum. Once you have added all the tags that you want, you can fill in the other inputs as specified above and then click Generate Output. Copy the output from the Output box. Go to the place on the forum where you want to post it and click the Source button and paste the output that you copied earlier into the post and then click the Source button again to see the formatted version of the post. From here, you can manually edit the post if needed using the forum's regular editing tools and submit the post when it is ready.
 
 ### Demo
 
@@ -106,12 +124,12 @@ The Out of Town Scores Generator is used to create scoreboards displaying the ou
 ### Inputs
 
 - `League`: Specify which league the scores are from. This will determine the team options that are provided below.
-- `Quarter`: The quarter that just ended.
+- `Quarter`: The quarter that just ended. (Note that it will automatically increment to the next quarter once you click Generate Output so that you don't have to update it again for the next post.)
 - `Number of Scoreboards`: The number of games to create scoreboards for. The number of selections below will adjust when this value is updated.
 - `Away Team #X`: The away team for game #X
 - `Away Score #X`: The score of the away team for game #X
 - `Home Team #X`: The home team for game #X
-- `Away Score #X`: The score of the home team for game #X
+- `Home Score #X`: The score of the home team for game #X
 
 ### How to Use
 
@@ -129,10 +147,10 @@ The Boxscores Generator is used to display the boxscores at the end of the game.
 
 - `League`: Specify which league the scores are from. This will determine the team options that are provided below.
 - `Number of Boxscores`: The number of games to display boxscores for. The number of selections below will adjust when this value is updated.
-- `Away Team #X`: The away team for game #X
-- `Home Team #X`: The home team for game #X
-- `Top Half URL #X`: The URL of the top half of the boxscore image for game #X
-- `Bottom Half URL #X`: The URL of the bottom half of the boxscore image for game #X
+- `Away Team #X`: The away team for game #X.
+- `Home Team #X`: The home team for game #X.
+- `Top Half URL #X`: The URL of the top half of the boxscore image for game #X.
+- `Bottom Half URL #X`: The URL of the bottom half of the boxscore image for game #X.
 
 ### How to Use
 
