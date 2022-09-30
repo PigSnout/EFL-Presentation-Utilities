@@ -4,7 +4,7 @@ var navbar_links = {
     "Single Post Formatter": "single_post_formatter.html",
     "Out of Town Scores Generator": "out_of_town_scores_generator.html",
     "Boxscores Generator": "boxscores_generator.html",
-    "About": "."
+    "Documentation": "."
 }
 
 function generate_navbar_html() {
