@@ -41,6 +41,8 @@ Fill in each of the inputs with the value specified above and then click Generat
 
 ### Demo
 
+https://user-images.githubusercontent.com/89674834/197662821-1abeb88e-e5c4-4eb7-b44b-287a636d1ff4.mp4
+
 ## Play By Play Format Fixer
 
 ### Purpose
@@ -84,6 +86,8 @@ Once you receive the Play By Play from the simmer, you can copy the entire text 
 
 ### Demo
 
+https://user-images.githubusercontent.com/89674834/197662926-8111fa6c-1151-4e58-b11d-f9d35bb3ae33.mp4
+
 ## Single Post Formatter
 
 ### Purpose
@@ -115,6 +119,8 @@ Copy the portion of the Play By Play that you want to format and paste it in to 
 
 ### Demo
 
+https://user-images.githubusercontent.com/89674834/197662962-9a0fd982-b7c4-41d3-9534-32bcd5f5f6b9.mp4
+
 ## Out of Town Scores Generator
 
 ### Purpose
@@ -137,6 +143,8 @@ Fill in each of the inputs with the value specified above and then click Generat
 
 ### Demo
 
+https://user-images.githubusercontent.com/89674834/197662984-2a41e047-16b5-4906-a234-09e16f105c61.mp4
+
 ## Boxscores Generator
 
 ### Purpose
@@ -157,3 +165,5 @@ The Boxscores Generator is used to display the boxscores at the end of the game.
 Fill in each of the inputs with the value specified above and then click Generate Output. Copy the output from the Output box. Go to the place on the forum where you want to post it and click the Source button and paste the output that you copied earlier into the post and then click the Source button again to see the formatted version of the post. From here, you can manually edit the post if needed using the forum's regular editing tools and submit the post when it is ready.
 
 ### Demo
+
+https://user-images.githubusercontent.com/89674834/197663013-e0f84865-0e29-4bb7-bbe7-64b98fc52680.mp4
