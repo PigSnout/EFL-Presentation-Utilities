@@ -133,9 +133,16 @@ function fix_line_time(line, next_line) {
     // after the time.
     
     var split_line = line.split(/(\d+:\d{2})/)
-    var split_next_line = next_line.split(/(\d+:\d{2})/)
 
-    var fixed_line = `${split_next_line[1]}${split_line[2]}`
+    if (next_line && !(next_line.includes("15:00 -"))) {
+        var split_next_line = next_line.split(/(\d+:\d{2})/)
+
+        var fixed_line = `${split_next_line[1]}${split_line[2]}`
+    }
+
+    else {
+        var fixed_line = `0:00${split_line[2]}`
+    }
 
     return fixed_line
 }
