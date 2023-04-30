@@ -32,7 +32,7 @@ leagues = {
             "Wisconsin Brigade": {
                 "Team Logo URL": "https://i.imgur.com/gHhtrmk.png",
                 "Team Color Code": "#4d4753"
-            },
+            }
         },
         "Conferences": [
             "Eastern",
@@ -42,6 +42,10 @@ leagues = {
     },
     "ECFA": {
         "Teams": {
+            "Anchorage Storm": {
+                "Team Logo URL": "https://i.imgur.com/iv8lK2G.png",
+                "Team Color Code": "#0bfd75"
+            },
             "Athens Carnage": {
                 "Team Logo URL": "https://i.imgur.com/vJ63D8u.png",
                 "Team Color Code": "#00002e"
@@ -54,9 +58,17 @@ leagues = {
                 "Team Logo URL": "https://i.imgur.com/pbFpewC.png",
                 "Team Color Code": "#5e1212"
             },
+            "Grand Rapids Growlers": {
+                "Team Logo URL": "https://i.imgur.com/7UnP0un.png",
+                "Team Color Code": "#964c00"
+            },
             "Hades Creek Phalanx": {
                 "Team Logo URL": "https://i.imgur.com/WVtuCfo.png",
                 "Team Color Code": "#4c494a"
+            },
+            "Lincoln Mammoths": {
+                "Team Logo URL": "https://i.imgur.com/4nTF9N8.png",
+                "Team Color Code": "#ac5918"
             },
             "Manchester Lookout": {
                 "Team Logo URL": "https://i.imgur.com/pl93CGX.png",
@@ -66,6 +78,10 @@ leagues = {
                 "Team Logo URL": "https://i.imgur.com/QJeUcqv.png",
                 "Team Color Code": "#6b2c88"
             },
+            "Sacramento Venom": {
+                "Team Logo URL": "https://i.imgur.com/5yWWeKR.png",
+                "Team Color Code": "#ff0000"
+            },
             "Savage City Wraiths": {
                 "Team Logo URL": "https://i.imgur.com/kd1jXPq.png",
                 "Team Color Code": "#9176d2"
@@ -73,7 +89,7 @@ leagues = {
             "Trenton Generals": {
                 "Team Logo URL": "https://i.imgur.com/c1CmYcH.png",
                 "Team Color Code": "#ba1f1f"
-            },
+            }
         },
         "Conferences": [
             "Heroes",
